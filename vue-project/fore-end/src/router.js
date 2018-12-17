@@ -9,6 +9,8 @@ import SoonPlay from './components/SoonPlay';
 import Cinema from './views/Cinema.vue';
 import Center from './views/Center.vue';
 import FilmDetail from './views/FilmDetail.vue';
+import Login from './views/Login.vue';
+import Home from './views/Home.vue';
 
 // 插件安装
 Vue.use(VueRouter);
@@ -16,34 +18,40 @@ Vue.use(VueRouter);
 const router = new VueRouter({
   routes: [
     {
-      // 首页
-      path: '/films',
-      name: 'films',
-      component: Films,
+      path: '/',
+      component: Home,
       children: [
         {
-          path: 'nowPlaying',
-          name: 'nowPlaying',
-          component: NowPaly
+          //  首页
+          path: 'films',
+          name: 'films',
+          component: Films,
+          children: [
+            {
+              path: 'nowPlaying',
+              name: 'nowPlaying',
+              component: NowPaly
+            },
+            {
+              path: 'comingSoon',
+              name: 'comingSoon',
+              component: SoonPlay
+            }
+          ]
         },
         {
-          path: 'comingSoon',
-          name: 'comingSoon',
-          component: SoonPlay
+          // 影院页
+          path: '/cinemas',
+          name: 'cinemas',
+          component: Cinema
+        },
+        {
+          // 个人中心页
+          path: '/center',
+          name: 'center',
+          component: Center
         }
       ]
-    },
-    {
-      // 影院页
-      path: '/cinemas',
-      name: 'cinemas',
-      component: Cinema
-    },
-    {
-      // 个人中心页
-      path: '/center',
-      name: 'center',
-      component: Center
     },
     {
       // 可以被其他子集路由利用。
@@ -51,6 +59,11 @@ const router = new VueRouter({
       path: '/film/:filmId',
       name: 'filmDetail',
       component: FilmDetail
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login
     },
     {
       path: '*',

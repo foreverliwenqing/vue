@@ -3,7 +3,7 @@
     <div class="center-view">
       <div class="avatar">
         <img src="../images/avator.png" alt="">
-        <div class="nick-name">立即登录</div>
+        <div class="nick-name" @click="login">立即登录</div>
       </div>
       <ul class="my-order-tab">
         <li>
@@ -40,7 +40,16 @@
 
 <script>
 export default {
-  name: 'Center'
+  name: 'Center',
+
+  methods: {
+    login () {
+      console.log(1);
+      this.$router.push({
+        path: '/login'
+      })
+    }
+  }
 }
 </script>
 
