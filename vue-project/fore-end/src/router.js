@@ -11,6 +11,7 @@ import Center from './views/Center.vue';
 import FilmDetail from './views/FilmDetail.vue';
 import Login from './views/Login.vue';
 import Home from './views/Home.vue';
+import myCard from './views/myCard.vue';
 
 // 插件安装
 Vue.use(VueRouter);
@@ -21,6 +22,10 @@ const router = new VueRouter({
       path: '/',
       component: Home,
       children: [
+        {
+          path: '',
+          redirect: 'films/nowPlaying'
+        },
         {
           //  首页
           path: 'films',
@@ -47,7 +52,7 @@ const router = new VueRouter({
         },
         {
           // 个人中心页
-          path: '/center',
+          path: 'center',
           name: 'center',
           component: Center
         }
@@ -64,6 +69,40 @@ const router = new VueRouter({
       path: '/login',
       name: 'login',
       component: Login
+    },
+    {
+      // 用户
+      path: '/user',
+      component: {
+        template: `
+          <div>
+            <router-view></router-view>
+          </div>
+        `
+      },
+      children: [
+        {
+          path: 'card',
+          name: 'myCard',
+          component: myCard,
+          // 在组件跳转之前实现路由的拦截
+          beforeEnter (to, from, next) {
+            // 判断用户手机号是否存在
+            if (localStorage.getItem('phone')) {
+              console.log('成功返回');
+              next();
+            } else {
+              // 如果没有手机号就条回到某个路径， 同时传入一个值给后面的用
+              next({
+                path: '/login',
+                query: {
+                  redirect: to.fullPath
+                }
+              })
+            }
+          }
+        }
+      ]
     },
     {
       path: '*',

@@ -15,7 +15,7 @@
           <div class="common-p">拼团订单</div>
         </li>
       </ul>
-      <div class="margin-set my-card">
+      <div class="margin-set my-card" @click='myCard'>
         <img src="../images/ka.png" alt="" class="ico">
         <span>卖座卡</span>
         <img src="../images/right.png" alt="" class="arrow">
@@ -47,6 +47,12 @@ export default {
       console.log(1);
       this.$router.push({
         path: '/login'
+      })
+    },
+    myCard () {
+      console.log(1);
+      this.$router.push({
+        path: '/user/card'
       })
     }
   }

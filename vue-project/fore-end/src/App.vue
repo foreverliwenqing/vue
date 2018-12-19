@@ -2,6 +2,7 @@
   <div id="app">
     <transition
       mode="out-in"
+      appear
       enter-active-class="animated bounceInUp"
       leave-active-class="animated bounceOutDown">
       <router-view></router-view>
